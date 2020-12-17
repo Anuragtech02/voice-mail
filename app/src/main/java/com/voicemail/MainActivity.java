@@ -1,7 +1,9 @@
 package com.voicemail;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView To,Subject,Message;
     private int numberOfClicks;
     private boolean isInitialFinished;
+    private SharedPreferences sharedPreferences ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        }, 500);
+
+
+        sharedPreferences = getSharedPreferences("MyLoginInfo", Context.MODE_PRIVATE);
+
+        Config.EMAIL = sharedPreferences.getString("email", "");
+        Config.PASSWORD = sharedPreferences.getString("password", "");
+
         isInitialFinished = false ;
         tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -165,16 +175,6 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 3:
                             Message.setText(result.get(0));
-                            status.setText("your mail");
-                            speak("Give your mail address");
-                            break;
-                        case 4 :
-                            Config.EMAIL= result.get(0);
-                            status.setText("password");
-                            speak("provide your password");
-                            break;
-                        case 5 :
-                            Config.PASSWORD = result.get(0);
                             status.setText("Confirm?");
                             speak("Please Confirm the mail\n To : " + To.getText().toString() + "\nSubject : " + Subject.getText().toString() + "\nMessage : " + Message.getText().toString() +"your mail "+Config.EMAIL+"your password" +Config.PASSWORD + "\nSpeak Yes to confirm");
                             break;
