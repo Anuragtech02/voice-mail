@@ -153,7 +153,11 @@ public class HomeActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK && null != data) {
                     ArrayList result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     assert result != null;
-                    listenPassword = result.get(0).toString();
+                    String pass;
+                    pass= result.get(0).toString().replaceAll("underscore","_");
+                    pass = pass.replaceAll("\\s+","");
+                    pass = pass.toLowerCase();
+                    listenPassword = pass;
                     password.setText(listenPassword);
 
                     saveToSharedPreference();

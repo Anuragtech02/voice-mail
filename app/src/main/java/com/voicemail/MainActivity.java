@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         Config.EMAIL = sharedPreferences.getString("email", "");
         Config.PASSWORD = sharedPreferences.getString("password", "");
 
+//        Toast.makeText(this, Config.EMAIL + Config.PASSWORD, Toast.LENGTH_SHORT).show();
+
         isInitialFinished = false ;
         tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -122,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
         String subject = Subject.getText().toString().trim();
         String message = Message.getText().toString().trim();
 
+        Config.EMAIL = sharedPreferences.getString("email", "");
+        Config.PASSWORD = sharedPreferences.getString("password", "");
+
         //Creating SendMail object
         SendMail sm = new SendMail(this, email, subject, message);
 
@@ -132,8 +137,6 @@ public class MainActivity extends AppCompatActivity {
         To.setText("");
         Subject.setText("");
         Message.setText("");
-        Config.EMAIL= "";
-        Config.PASSWORD = "";
         status.setText("Status");
     }
 
@@ -162,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
                             to= result.get(0).replaceAll("underscore","_");
                             to = to.replaceAll("\\s+","");
                             to = to + "@gmail.com";
+                            to = to.toLowerCase();
                             To.setText(to);
                             status.setText("Subject?");
                             speak("What should be the subject?");
@@ -184,6 +188,8 @@ public class MainActivity extends AppCompatActivity {
                             {
                                 status.setText("Sending");
                                 speak("Sending the mail");
+                                Config.EMAIL = sharedPreferences.getString("email", "");
+                                Config.PASSWORD = sharedPreferences.getString("password", "");
                                 sendEmail();
                             }else
                             {
