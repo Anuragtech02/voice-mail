@@ -212,10 +212,10 @@ public class MainActivity extends AppCompatActivity {
                         speak("Give me message");
                         break;
                     case 4:
-                        speak("provide ur mail");
+                        speak("provide your mail");
                         break;
                     case 5:
-                        speak("provide ur password");
+                        speak("provide your password");
                         break;
                     default:
                         speak("say yes or no");

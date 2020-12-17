@@ -66,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                             Log.e("TTS", "This Language is not supported");
                         }
-                        speak("Welcome to voice mail. Tell me your login credentials ");
+                        speak("Welcome to voice mail. Tell me your Gmail login credentials");
                     } else {
                         Log.e("TTS", "Initilization Failed!");
                     }
@@ -88,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
                 if(!(email.getText().toString().equals("") || password.getText().toString().equals(""))){
                     Toast.makeText(HomeActivity.this, email.getText().toString(), Toast.LENGTH_SHORT).show();
 
-                    listenEmail = email.getText().toString();
+                    listenEmail = email.getText().toString() + "@gmail.com";
                     listenPassword = email.getText().toString();
                     saveToSharedPreference();
                 }
