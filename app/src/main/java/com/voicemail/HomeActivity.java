@@ -143,6 +143,7 @@ public class HomeActivity extends AppCompatActivity {
                     to= result.get(0).toString().replaceAll("underscore","_");
                     to = to.replaceAll("\\s+","");
                     to = to + "@gmail.com";
+                    to = to.toLowerCase();
                     listenEmail = to;
                     email.setText(listenEmail);
                     speak("Tap again to enter Password");
