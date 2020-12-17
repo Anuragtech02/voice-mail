@@ -139,7 +139,11 @@ public class HomeActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK && null != data) {
                     ArrayList result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     assert result != null;
-                    listenEmail = result.get(0).toString();
+                    String to;
+                    to= result.get(0).toString().replaceAll("underscore","_");
+                    to = to.replaceAll("\\s+","");
+                    to = to + "@gmail.com";
+                    listenEmail = to;
                     email.setText(listenEmail);
                     speak("Tap again to enter Password");
                 }
